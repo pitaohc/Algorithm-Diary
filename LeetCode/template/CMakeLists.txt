@@ -12,7 +12,7 @@ source_group("Resource" FILES ${CURRENT_RESOURCES})
 # file(GLOB_RECURSE CURRENT_SOURCES "*.c" "*.cpp")
 # source_group("Source Files" FILES ${CURRENT_SOURCES })
 # message(DEBUG CURRENT_SOURCES)
-set(SRC_LIST main.cpp)
+set(SRC_LIST main.cpp util.cpp)
 
 # 设置默认启动项
 set_property ( DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME} )
