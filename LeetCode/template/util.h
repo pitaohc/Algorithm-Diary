@@ -5,6 +5,11 @@
 template<class T>
 std::ostream& operator<<(std::ostream& out, const std::vector<T>& vect)
 {
+    if (vect.size() == 0)
+    {
+        out << "[]";
+        return out;
+    }
     out << "[";
     for (const auto& elem : vect)
     {
@@ -18,8 +23,12 @@ std::ostream& operator<<(std::ostream& out, const std::vector<T>& vect)
 template<class T>
 std::ostream& operator<<(std::ostream& out, const std::vector<std::vector<T>>& vect)
 {
+    if (vect.size() == 0)
+    {
+        out << "[]";
+        return out;
+    }
     out << "[";
-
     for (const auto& elem : vect)
     {
         out << elem << ",\n";
