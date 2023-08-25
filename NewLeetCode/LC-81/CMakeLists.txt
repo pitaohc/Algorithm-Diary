@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 set(PROJECT_NAME LC-81)
 project(${PROJECT_NAME} CXX)
-
+# 设置c++版本为20
+set(CMAKE_CXX_STANDARD 20)
 # 引用上级目录中的utils中的头文件
 set(UTILS_DIR ../utils)
 include_directories(${UTILS_DIR})

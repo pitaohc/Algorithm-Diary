@@ -6,7 +6,7 @@
 #define LC_69_SOLUTION_H
 
 #include <cmath>
-
+#include <algorithm>
 class Solution {
 public:
     int mySqrt(int x) {

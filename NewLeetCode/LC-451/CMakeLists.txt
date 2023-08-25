@@ -10,6 +10,9 @@ file(GLOB_RECURSE UTILS_FILES ${UTILS_DIR}/*.cpp ${UTILS_DIR}/*.h)
 
 # 组合字符串 PROJECT_NAME +".cpp"
 set(SOURCE_FILES ${PROJECT_NAME}.cpp ${PROJECT_NAME}-Solution.h)
-
+# 导入fmt库
+find_package(fmt CONFIG REQUIRED)
 # 编译项目
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${UTILS_FILES})
+# 链接fmt库
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
