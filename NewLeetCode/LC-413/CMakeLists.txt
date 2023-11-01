@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-set(PROJECT_NAME LC-47)
+set(PROJECT_NAME LC-413)
 project(${PROJECT_NAME} CXX)
 
 # 引用上级目录中的utils中的头文件
