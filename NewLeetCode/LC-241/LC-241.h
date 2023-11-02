@@ -6,55 +6,59 @@
 
 using namespace std;
 class Solution {
+    vector<int> nums;
+    vector<char> ops;
+    vector<vector<vector<int>>> dp; //记忆化搜索，存储中间状态
 public:
-    string expression;
-    int toInt(int begin, int end)
+    void getStatus(int begin, int diff, int end)
     {
-        int result = 0;
-        while (begin < end)
+        vector<int> status;
+        for (auto left : dp[begin][diff])
         {
-            result = result * 10 + expression[begin] - '0';
-            ++begin;
-        }
-        return result;
-    }
-    vector<int> diffWaysToCompute(int begin, int end) //左闭右开
-    {
-        vector<int> result;
-        size_t n = end - begin;
-        for (size_t i = begin; i < end; i++)
-        {
-            char c = expression[i];
-            if (c == '+' || c == '-' || c == '*')
+            for (auto right : dp[diff + 1][end])
             {
-                vector<int> left = diffWaysToCompute(begin, i);
-                vector<int> right = diffWaysToCompute(i + 1, end);
-                for (const int& l : left)
+                int val = 0;
+                switch (ops[diff])
                 {
-                    for (const int& r : right)
+                case '+': val = left + right; break;
+                case '-': val = left - right; break;
+                case '*': val = left * right; break;
+                }
+                dp[begin][end].push_back(val);
+            }
+        }
+
+    }
+    vector<int> diffWaysToCompute(string expression) {
+        nums.clear();
+        ops.clear();
+        int num = 0;
+        char op = ' ';
+        istringstream ss(expression + "+");
+        while (ss >> num && ss >> op) //获取所有的数字和运算符
+        {
+            nums.push_back(num);
+            ops.push_back(op);
+        }
+        int n = nums.size();
+        dp = vector<vector<vector<int>>>(n, vector<vector<int>>(n, vector<int>()));
+        for (int i = 0; i < n; ++i) //遍历结束位置
+        {
+            for (int j = i; j >= 0; --j) //遍历开始位置
+            {
+                if (i != j) //如果不止一个数字
+                {
+                    for (int k = j; k < i; ++k) //遍历分割位置
                     {
-                        switch (c)
-                        {
-                        case '+':
-                            result.push_back(l + r);
-                            break;
-                        case '-':
-                            result.push_back(l - r);
-                            break;
-                        case '*':
-                            result.push_back(l * r);
-                            break;
-                        }
+                        getStatus(j, k, i);
                     }
+                }
+                else//如果只有一个数字
+                {
+                    dp[j][i].push_back(nums[i]);
                 }
             }
         }
-        if (result.empty()) result.push_back(toInt(begin, end)); //如果是纯数字则返回这个数字,此处做了重复性工作
-        return result;
-    }
-    vector<int> diffWaysToCompute(string expression) {
-        this->expression = expression;
-        return diffWaysToCompute(0, this->expression.size());
+        return dp[0][n - 1]; //返回从0开始，到n-1结束的状态
     }
 };
-
