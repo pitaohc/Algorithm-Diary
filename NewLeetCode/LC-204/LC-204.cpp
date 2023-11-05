@@ -13,8 +13,32 @@ int main() {
     int n, ans, res;
 
     fmt::print("Case {}\n", caseNum++);
+    n = 2;
+    ans = 0;
+    res = sol.countPrimes(n);
+    fmt::print("n = {}, ans = {}, res = {}\n", n, ans, res);
+
+    fmt::print("Case {}\n", caseNum++);
     n = 3;
     ans = 1;
+    res = sol.countPrimes(n);
+    fmt::print("n = {}, ans = {}, res = {}\n", n, ans, res);
+
+    fmt::print("Case {}\n", caseNum++);
+    n = 4;
+    ans = 1;
+    res = sol.countPrimes(n);
+    fmt::print("n = {}, ans = {}, res = {}\n", n, ans, res);
+
+    fmt::print("Case {}\n", caseNum++);
+    n = 7;
+    ans = 3;
+    res = sol.countPrimes(n);
+    fmt::print("n = {}, ans = {}, res = {}\n", n, ans, res);
+
+    fmt::print("Case {}\n", caseNum++);
+    n = 10;
+    ans = 4;
     res = sol.countPrimes(n);
     fmt::print("n = {}, ans = {}, res = {}\n", n, ans, res);
 

@@ -12,27 +12,21 @@ public:
         {
             return 0;
         }
-        vector<int> primes(1,2);
+        vector<bool> isPrimes(n, true);
+        isPrimes[0] = isPrimes[1] = false;
+            
         for (size_t num = 2; num < n; num++)
         {
-            bool isPrime = true;
-            for (int prime : primes)
+            if (!isPrimes[num])
             {
-                if (num % prime == 0)
-                {
-                    isPrime = false;
-                    break;
-                }
-                if (prime * prime > num)
-                {
-                    break;
-                }
+                continue;
             }
-            if (isPrime)
+            for (size_t target = num*2; target < n; target+=num)
             {
-                primes.push_back(num);
+                isPrimes[target] = false;
+
             }
         }
-        return primes.size();
+        return count_if(isPrimes.begin(), isPrimes.end(), [](auto val) {return val; });
     }
 };
