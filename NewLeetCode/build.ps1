@@ -9,3 +9,4 @@ if (Test-Path -Path "./build") {
 $cmake_command = "cmake -B build -DCMAKE_TOOLCHAIN_FILE=${env:vcpkg}\scripts\buildsystems\vcpkg.cmake"
 echo $cmake_command
 Invoke-Expression $cmake_command
+build/NEW-LeetCode.sln
