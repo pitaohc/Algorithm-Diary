@@ -8,13 +8,7 @@ using namespace std;
 class Solution {
 public:
     bool isPowerOfThree(int n) {
-        if (n <= 0) return false;
-        while (n % 3 == 0)
-        {
-            fmt::print("{}\n", n);
-            n /= 3;
-        }
-        fmt::print("{}\n", n);
-        return n == 1;
+        constexpr int MAGICNUM = 1162261467;
+        return n > 0 && MAGICNUM % n == 0;
     }
 };
