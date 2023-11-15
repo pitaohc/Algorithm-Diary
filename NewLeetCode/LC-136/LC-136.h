@@ -8,20 +8,17 @@ using namespace std;
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        unordered_map<int, int> um;
+        unordered_set<int> us;
         for (int num : nums)
         {
-            ++um[num];
-        }
-        int result = 0;
-        for (const auto& [n, c] : um)
-        {
-            if (c == 1)
+            if (us.find(num) != us.end()) { //如果已经有元素存在则删除
+                us.erase(num);
+            }
+            else //如果没有则添加
             {
-                result = n;
-                break;
+                us.insert(num);
             }
         }
-        return result;
+        return *us.begin(); //最后会剩下单个元素，直接返回
     }
 };
