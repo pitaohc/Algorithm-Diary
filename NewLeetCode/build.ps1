@@ -1,11 +1,11 @@
-# 读取第一个参数为vcpkg
+# 璇诲彇绗竴涓弬鏁颁负vcpkg
 
-# 检查是否存在build目录，如果不存在则删除build目录
+# 妫�鏌ユ槸鍚﹀瓨鍦╞uild鐩綍锛屽鏋滀笉瀛樺湪鍒欏垹闄uild鐩綍
 if (Test-Path -Path "./build") {
 	Remove-Item -Path "./build" -Recurse -Force
 }
 
-# 执行cmake命令
+# 鎵цcmake鍛戒护
 $cmake_command = "cmake -B build -DCMAKE_TOOLCHAIN_FILE=${env:vcpkg}\scripts\buildsystems\vcpkg.cmake"
 echo $cmake_command
 Invoke-Expression $cmake_command
