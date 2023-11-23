@@ -8,21 +8,21 @@ using namespace std;
 class Solution {
 public:
     vector<int> twoSum(vector<int>& numbers, int target) {
-        const int n = numbers.size();
-        int left = 0, right = n - 1;
-        
-        while (left < right) {
-            int sum = numbers[left] + numbers[right];
+        auto left_it = numbers.begin(), right_it = numbers.end() - 1;
+        while (left_it != right_it) {
+            int sum = *left_it + *right_it;
             if (sum == target) {
                 break;
             }
             else if (sum < target) {
-                ++left;
+                ++left_it;
             }
             else {
-                --right;
+                --right_it;
             }
         }
-        return { left+1,right+1 };
+
+
+        return { static_cast<int>(left_it - numbers.begin() + 1), static_cast<int>(right_it - numbers.begin() + 1) };
     }
 };
