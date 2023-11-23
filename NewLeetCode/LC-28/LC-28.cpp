@@ -13,9 +13,9 @@ int main() {
 
     string s, p;
     fmt::print("Case {}\n", caseNum++);
+    s = "abcdabcea";
     p = "abcdabce";
-    fmt::print("p = {}\n"
-        "n = {}\n", p, sol.buildNext(p));
+    sol.strStr(s, p);
 
     return 0;
 }

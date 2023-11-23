@@ -8,27 +8,30 @@ using namespace std;
 class Solution {
 public:
     int strStr(string haystack, string needle) {
-        int k = -1, n = haystack.size(), p = needle.size();
-        if (p == 0) return 0;
+        int p = -1, n = haystack.size(), m = needle.size();
+        if (m == 0) return 0;
         vector<int> next;
         calNext(needle, next);
         for (int i = 0; i < n; ++i) {
-            while (k > -1 && needle[k + 1] != haystack[i]) {
-                k = next[k];
+            //结构和计算next数组类似
+            while (p > -1 && needle[p + 1] != haystack[i]) {
+                p = next[p];
             }
-            if (needle[k + 1] == haystack[i]) {
-                ++k;
-            }
-            if (k == p - 1) {
-                return i - p + 1;
+            p += (needle[p + 1] == haystack[i]);
+            if (p == m - 1) { //如果遍历完needle，说明完全匹配
+                return i - m + 1; //返回开始位置
             }
         }
         return -1;
     }
     void calNext(const string& needle, vector<int>& next) {
+#ifdef _DEBUG
+        fmt::print("p {}\n", needle);
+#endif // _DEBUG
+
         int n = needle.size();
         next = vector<int>(n, -1);
-        for (int i = 1, p = -1; i < n; ++i) { //p表示公共前缀后缀长度
+        for (int i = 1, p = -1; i < n; ++i) { //p表示当前公共前缀后缀长度
             while (p > -1 && needle[p + 1] != needle[i]) { //回溯条件：长度不为-1,字符不匹配
                 p = next[p]; //如果下一位不同，往前回溯
             }
@@ -36,6 +39,9 @@ public:
             //    ++p;
             //}
             next[i] = p = p + (needle[p + 1] == needle[i]);
+#ifdef _DEBUG
+            fmt::print("i = {}, p = {}, next {}\n", i, p, next);
+#endif
         }
 
     }
