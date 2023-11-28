@@ -16,25 +16,38 @@ using namespace std;
  * };
  */
 class Solution {
-private:
-    template <class _Ty, class _Container = vector<_Ty>, class _Pr = less<typename _Container::value_type>>
-    void addListtoQueue(priority_queue<_Ty, _Container, _Pr>& pq, ListNode* const head) {
-        ListNode* cur = head;
-        while (cur != nullptr) {
-            pq.push(cur->val);
-            cur = cur->next;
-        }
-    }
+
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        priority_queue<int, vector<int>> pq;
-        for (ListNode* const list : lists) {
-            addListtoQueue(pq, list);
+        using Node = ListNode*;
+        auto cmp = [](Node left, Node right) -> bool {
+            return left->val > right->val;
+            };
+        if (lists.empty())
+        {
+            return nullptr;
         }
-        ListNode* head = nullptr;
+        priority_queue<Node, vector<Node>, decltype(cmp)> pq;
+        for (Node list : lists) {
+            if (list) {
+                pq.push(list);
+            }
+        }
+        if (pq.empty()) {
+            return nullptr;
+        }
+        Node head = pq.top(), cur = head;
+        pq.pop();
+        if (head->next != nullptr) {
+            pq.push(head->next);
+        }
         while (!pq.empty()) {
-            head = new ListNode(pq.top(), head);
+            cur->next = pq.top();
             pq.pop();
+            cur = cur->next;
+            if (cur->next != nullptr) {
+                pq.push(cur->next);
+            }
         }
         return head;
     }
