@@ -18,20 +18,26 @@ using namespace std;
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        if (list2 == nullptr) {
-            return list1;
+        ListNode* head = new ListNode(0);
+        ListNode* cur = head;
+        while (list1 != nullptr && list2 != nullptr) {
+            if (list1->val <= list2->val) {
+                //list1 smaller
+                cur->next = list1;
+                list1 = list1->next;
+            }
+            else {
+                cur->next = list2;
+                list2 = list2->next;
+            }
+#ifdef _DEBUG
+            cout << "list: " << head << endl;
+#endif // _DEBUG
+            cur = cur->next;
         }
-        else if (list1 == nullptr) {
-            return list2;
-        }
-        if (list1->val > list2->val) {
-            list2->next = mergeTwoLists(list1, list2->next);
-            return list2;
-        }
-        else {
-            list1->next = mergeTwoLists(list1->next, list2);
-            return list1;
-        }
-
+        cur->next = (list1 != nullptr) ? list1 : list2;
+        cur = head->next;
+        delete head; //释放额外存储的头节点
+        return cur;
     }
 };
