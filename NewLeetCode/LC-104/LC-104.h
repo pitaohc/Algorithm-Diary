@@ -19,9 +19,26 @@ using namespace std;
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        if (root == nullptr) {
-            return 0;
+        if (root == nullptr) return 0;
+        using Node = TreeNode*;
+        int depth = 0;
+        queue<Node> que;
+        que.push(root);
+        while (!que.empty()) {
+            int size = que.size();
+            while (size > 0) {
+                Node front = que.front();
+                que.pop();
+                if (front->left != nullptr) {
+                    que.push(front->left);
+                }
+                if (front->right != nullptr) {
+                    que.push(front->right);
+                }
+                --size;
+            }
+            ++depth;
         }
-        return max(maxDepth(root->left),maxDepth(root->right)) + 1;
+        return depth;
     }
 };
