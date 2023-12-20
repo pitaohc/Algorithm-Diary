@@ -152,11 +152,11 @@ void test_to_string_1() {
 }
 void test_to_string_2() {
     fmt::print(fmt::fg(fmt::color::yellow), "{}\n", __func__);
-    vector<int>data = { 5, 4, 7, 3, NULL, 2, NULL, -1, NULL, 9, NULL };
+    vector<int>data = { 5, 4, 7, 3, NULL, 2, NULL, -1, NULL, 9 };
     TreeNode* root = buildTree(data);
     std::string info = to_string(root);
     fmt::print("info: {}\n", info);
-    assert(info == "{5, 4, 7, 3, NULL, 2, NULL, -1, NULL, 9, NULL}");
+    assert(info == "{5, 4, 7, 3, NULL, 2, NULL, -1, NULL, 9}");
     deleteTree(root);
     fmt::print(fmt::fg(fmt::color::green), "{} PASSED\n", __func__);
 }

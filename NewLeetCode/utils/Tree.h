@@ -114,11 +114,16 @@ std::string to_string(TreeNode* root) {
     while (!q.empty()) {
         TreeNode* node = q.front();
         q.pop();
-        ss << ", ";
+
         if (node == nullptr) {
-            ss << "NULL";
+            if (!q.empty())
+            {
+                ss << ", ";
+                ss << "NULL";
+            }
         }
         else {
+            ss << ", ";
             ss << node->val;
             if (node->left != nullptr || node->right != nullptr)
             {
