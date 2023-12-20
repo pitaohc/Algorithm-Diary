@@ -91,50 +91,46 @@ void deleteTree(TreeNode* root) {
     }
 
 }
-/*
-* 输出树
-* 格式为
-*     123
-*     / \
-*    11 1234
-*    /  /  \
-* -100  1  12
-*      / \
-*     15 21
-*/
-void printTree(TreeNode* root) {
-
-    /*
-    if (root == nullptr) {
-        fmt::print(fmt::fg(fmt::color::red), "Empty Tree\n");
+/// <summary>
+/// 输出树的序列化字符串
+/// </summary>
+/// <param name="root"></param>
+/// <returns></returns>
+std::string to_string(TreeNode* root) {
+    if (root == nullptr) return "{}";
+    using std::string;
+    using std::stringstream;
+    using std::queue;
+    stringstream ss;
+    ss << '{';
+    ss << root->val;
+    queue<TreeNode*> q;
+    if (root->left != nullptr || root->right != nullptr)
+    {
+        //如果是叶子节点就不存储子节点
+        q.push(root->left);
+        q.push(root->right);
     }
-    int depth = 0;
-    //计算树高度
-    function<int(TreeNode*)> getDepth = [&](TreeNode* node) -> int {
-        if (node == 0) return 0;
-
-        return std::max(getDepth(node->left), getDepth(node->right)) + 1;
-    };
-    //根据高度构建输出缓冲区
-    depth = getDepth(root);
-    //fmt::print("depth = {}\n", depth);
-    std::vector<std::string> buffers(depth * 2 - 1);
-    std::for_each(buffers.begin(), buffers.end(), [](std::string& buffer) {buffer.reserve(PRINTBUFFERSIZE + 1); });
-
-    function<int(TreeNode*, int, int)> printNode = [&](TreeNode* node, int level, int beginPos = 0) ->int {
-        if (node == nullptr) return 0;
-        //后序遍历
-        int leftCharNum = 0, rightCharNum = 0;
-        if (node->left) {
-            leftCharNum = printNode(node->left, level + 1, beginPos);
+    while (!q.empty()) {
+        TreeNode* node = q.front();
+        q.pop();
+        ss << ", ";
+        if (node == nullptr) {
+            ss << "NULL";
         }
-        if (node->right)
-        {
-            rightCharNum = printNode(node->right, level + 1, beginPos + leftCharNum + 1);
+        else {
+            ss << node->val;
+            if (node->left != nullptr || node->right != nullptr)
+            {
+                //如果是叶子节点就不存储子节点
+                q.push(node->left);
+                q.push(node->right);
+            }
         }
+    }
 
-    };
-    */
+    ss << '}';
+    return ss.str();
 }
 
 #endif

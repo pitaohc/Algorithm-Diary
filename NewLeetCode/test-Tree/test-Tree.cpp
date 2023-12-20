@@ -9,6 +9,7 @@
 #include <assert.h>
 using namespace std;
 
+
 void test_build_empty() {
     fmt::print(fmt::fg(fmt::color::yellow), "TEST_BUILD_EMPTY\n");
     vector<int> data = {};
@@ -68,7 +69,7 @@ void test_build_case2() {
     fmt::print(fmt::fg(fmt::color::green), "TEST_BUILD_CASE2 PASS\n");
 }
 void test_build_case3() {
-    fmt::print(fmt::fg(fmt::color::yellow), "TEST_BUILD_CASE3\n");
+    fmt::print(fmt::fg(fmt::color::yellow), "{}\n", __func__);
 
     vector<int>data = { 5, 4, 7, 3, NULL, 2, NULL, -1, NULL, 9 };
     /*
@@ -98,7 +99,71 @@ void test_build_case3() {
     deleteTree(root);
     fmt::print(fmt::fg(fmt::color::green), "TEST_BUILD_CASE3 PASS\n");
 }
+
+void test_to_string_root() {
+    fmt::print(fmt::fg(fmt::color::yellow), "{}\n", __func__);
+    vector<int>data = { 5 };
+    TreeNode* root = buildTree(data);
+    std::string info = to_string(root);
+    fmt::print("info: {}\n", info);
+    assert(info == "{5}");
+    deleteTree(root);
+    fmt::print(fmt::fg(fmt::color::green), "{} PASSED\n", __func__);
+}
+void test_to_string_empty() {
+    fmt::print(fmt::fg(fmt::color::yellow), "{}\n", __func__);
+    vector<int>data = { };
+    TreeNode* root = buildTree(data);
+    std::string info = to_string(root);
+    fmt::print("info: {}\n", info);
+    assert(info == "{}");
+    deleteTree(root);
+    fmt::print(fmt::fg(fmt::color::green), "{} PASSED\n", __func__);
+}
+void test_to_string_0() {
+    fmt::print(fmt::fg(fmt::color::yellow), "{}\n", __func__);
+    vector<int>data = { 0 };
+    TreeNode* root = buildTree(data);
+    std::string info = to_string(root);
+    fmt::print("info: {}\n", info);
+    assert(info == "{}");
+    deleteTree(root);
+    fmt::print(fmt::fg(fmt::color::green), "{} PASSED\n", __func__);
+}
+void test_to_string_simple() {
+    fmt::print(fmt::fg(fmt::color::yellow), "{}\n", __func__);
+    vector<int>data = { 1,2,3 };
+    TreeNode* root = buildTree(data);
+    std::string info = to_string(root);
+    fmt::print("info: {}\n", info);
+    assert(info == "{1, 2, 3}");
+    deleteTree(root);
+    fmt::print(fmt::fg(fmt::color::green), "{} PASSED\n", __func__);
+}
+void test_to_string_1() {
+    fmt::print(fmt::fg(fmt::color::yellow), "{}\n", __func__);
+    vector<int>data = { 1,2,3,4,5 };
+    TreeNode* root = buildTree(data);
+    std::string info = to_string(root);
+    fmt::print("info: {}\n", info);
+    assert(info == "{1, 2, 3, 4, 5}");
+    deleteTree(root);
+    fmt::print(fmt::fg(fmt::color::green), "{} PASSED\n", __func__);
+}
+void test_to_string_2() {
+    fmt::print(fmt::fg(fmt::color::yellow), "{}\n", __func__);
+    vector<int>data = { 5, 4, 7, 3, NULL, 2, NULL, -1, NULL, 9, NULL };
+    TreeNode* root = buildTree(data);
+    std::string info = to_string(root);
+    fmt::print("info: {}\n", info);
+    assert(info == "{5, 4, 7, 3, NULL, 2, NULL, -1, NULL, 9, NULL}");
+    deleteTree(root);
+    fmt::print(fmt::fg(fmt::color::green), "{} PASSED\n", __func__);
+}
+
 int main() {
+
+
     //构建树的测试用例
     test_build_empty();
     test_build_0();
@@ -106,5 +171,12 @@ int main() {
     test_build_case1();
     test_build_case2();
     test_build_case3();
+    //输出树的测试用例
+    test_to_string_root();
+    test_to_string_empty();
+    test_to_string_0();
+    test_to_string_simple();
+    test_to_string_1();
+    test_to_string_2();
     return 0;
 }
