@@ -1,10 +1,11 @@
+#include <iostream>
+#include <fmt/core.h>
+#include <fmt/color.h>
+#include <fmt/ranges.h>
+#include "LC-000.h"
 #include "List.h"
 #include "util.h"
-#include <iostream>
-#include "LC-000.h"
-#include<fmt/core.h>
-#include<fmt/color.h>
-#include<fmt/ranges.h>
+#include "Tree.h"
 using namespace std;
 
 int main() {
