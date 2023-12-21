@@ -5,9 +5,7 @@
 
 #include<vector>
 #include<queue>
-#include<fmt/core.h>
-#include<fmt/ranges.h>
-#include<fmt/color.h>
+
 
 constexpr int PRINTBUFFERSIZE = 2048;
 //Definition for a binary tree node.
@@ -119,7 +117,7 @@ std::string to_string(TreeNode* root) {
             if (!q.empty())
             {
                 ss << ", ";
-                ss << "NULL";
+                ss << "null";
             }
         }
         else {
