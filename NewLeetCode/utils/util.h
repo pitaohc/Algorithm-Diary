@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <iostream>
-#include<vector>
-
+#include <vector>
+constexpr int null = NULL;
 template<class T>
 std::ostream& operator<<(std::ostream& out, const std::vector<T>& vect)
 {
