@@ -36,3 +36,6 @@
 out/
 build/
 cmake-build-debug/
+
+# Rust
+target/
