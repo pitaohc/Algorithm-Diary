@@ -16,18 +16,18 @@ public:
         for (const auto& edge : richer) {
             graph[edge[1]].emplace_back(edge[0]);
         }
-        vector<int> res(n);
-        vector<uint8_t> visited(n, false);
-        for (int i = 0; i < n; ++i) {
-            res[i] = i;
-        }
+        vector<int> res(n,-1);
+#ifdef _DEBUG
+        fmt::print("Graph: \n"
+            "{}\n", graph);
+#endif // _DEBUG
 
         function<void(int)> dfs = [&](int node) {
-            int q = quiet[res[node]]; //标记当前最优值
-            int p = res[node]; //标记当前最优节点
+            int q = quiet[node]; //标记当前最优值
+            int p = node; //标记当前最优节点
 
             for (auto& next : graph[node]) {
-                if (!visited[next]) {
+                if (res[next] == -1) {
                     dfs(next);
                 }
                 if (q > quiet[next]) { // 更新最优值
@@ -37,10 +37,16 @@ public:
             }
             quiet[node] = q;
             res[node] = p;
-            visited[node] = true;
+#ifdef _DEBUG
+            fmt::print("{} quiet: {}, res: {}\n", node, quiet[node], res[node]);
+#endif // _DEBUG
+
         };
         for (int i = 0; i < n; ++i) {
-            dfs(i);
+            if (res[i] == -1)
+            {
+                dfs(i);
+            }
         }
         return res;
     }
