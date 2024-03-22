@@ -18,7 +18,7 @@ void test(vector<int> citations, int ans) {
         fmt::print(fmt::fg(fmt::color::green), "PASS\n");
     }
     else {
-        fmt::print(fmt::fg(fmt::color::green), "PASS\n");
+        fmt::print(fmt::fg(fmt::color::green), "FAIL\n");
         fmt::print("Expected: {}\n", ans);
         fmt::print("Actually: {}\n", res);
     }
@@ -26,5 +26,7 @@ void test(vector<int> citations, int ans) {
 int main() {
 
     test({ 3, 0, 6, 1, 5 }, 3);
+    test({ 0,1,2,3,4,5,6,6,6,6 }, 5);
+    //test({ 1,1 }, 1);
     return 0;
 }
